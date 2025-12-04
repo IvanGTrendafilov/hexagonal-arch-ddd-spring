@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_outer_classname = "GreetingCreatedEventProto";
+option java_package = "com.hex.arch.greeting.proto";
+
+message GreetingCreatedEvent {
+  string greeting_id = 1;
+  string message = 2;
+  string recipient = 3;
+  int64 created_at_epoch_millis = 4;
+}

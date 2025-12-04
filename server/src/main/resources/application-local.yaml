@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/greeting_db
+    username: postgres
+    password: postgres
+
+logging:
+  level:
+    root: info
+    com.hex.arch.greeting: debug
