@@ -13,7 +13,7 @@ public record Greeting(
     String message,
     @Nullable String recipient,
     Instant createdAt
-) {
+) implements java.io.Serializable {
     public Greeting {
         if (message == null || message.isBlank()) {
             throw new IllegalArgumentException("Message cannot be null or blank");

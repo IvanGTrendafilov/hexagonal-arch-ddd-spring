@@ -1,8 +1,8 @@
-package com.hex.arch.greeting.infra.rest;
+package com.hex.arch.greeting.infra.adapter.inbound;
 
 import com.hex.arch.greeting.client.CreateGreetingRequest;
 import com.hex.arch.greeting.client.GreetingResponse;
-import com.hex.arch.greeting.client.GreetingsAPI;
+import com.hex.arch.greeting.client.driving.port.GreetingsAPI;
 import com.hex.arch.greeting.domain.model.Greeting;
 import com.hex.arch.greeting.domain.service.GreetingService;
 import jakarta.validation.Valid;
@@ -20,11 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 @NullMarked
 @RestController
 @RequestMapping("/api/v1/greetings")
-public class GreetingsController implements GreetingsAPI {
-    private static final Logger log = LoggerFactory.getLogger(GreetingsController.class);
+public class ForGreetingsController implements GreetingsAPI {
+    private static final Logger log = LoggerFactory.getLogger(ForGreetingsController.class);
     private final GreetingService greetingService;
 
-    public GreetingsController(GreetingService greetingService) {
+    public ForGreetingsController(GreetingService greetingService) {
         this.greetingService = greetingService;
     }
 
@@ -43,7 +43,7 @@ public class GreetingsController implements GreetingsAPI {
 
     @Override
     public ResponseEntity<GreetingResponse> getGreeting(@PathVariable UUID id) {
-        log.atDebug().addKeyValue("id", id).log("Finding greeting");
+        log.atInfo().addKeyValue("id", id).log("Finding greeting");
 
         return greetingService
             .getGreeting(id)

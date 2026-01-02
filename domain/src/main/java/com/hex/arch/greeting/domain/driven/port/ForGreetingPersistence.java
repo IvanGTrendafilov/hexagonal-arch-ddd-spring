@@ -1,4 +1,4 @@
-package com.hex.arch.greeting.domain.repository;
+package com.hex.arch.greeting.domain.driven.port;
 
 import com.hex.arch.greeting.domain.model.Greeting;
 import java.util.Optional;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @NullMarked
 @Repository
-public interface GreetingRepository {
+public interface ForGreetingPersistence {
     void save(Greeting greeting);
 
     Optional<Greeting> findById(UUID id);

@@ -11,5 +11,5 @@ public record GreetingResponse(
     String message,
     @Nullable String recipient,
     Instant createdAt
-) {}
+) implements java.io.Serializable {}
 

@@ -7,6 +7,9 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
+}
 
 dependencyResolutionManagement {
     @Suppress("UnstableApiUsage")
@@ -19,9 +22,5 @@ dependencyResolutionManagement {
 // Project specific settings
 // ---------------------------------------------------
 rootProject.name = "greeting-service"
-
-allprojects {
-    group = "com.hex.arch"
-}
 
 include("api", "domain", "data", "client", "server")

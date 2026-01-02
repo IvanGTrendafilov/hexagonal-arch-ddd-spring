@@ -20,6 +20,8 @@ description = "Greeting Service - Data module"
 
 dependencies {
     implementation(project(":domain"))
+    implementation("org.jspecify:jspecify:0.3.0")
+    implementation("org.springframework:spring-context")
     implementation("org.springframework:spring-jdbc")
     implementation("com.fasterxml.jackson.core:jackson-databind")
     implementation("org.flywaydb:flyway-core")

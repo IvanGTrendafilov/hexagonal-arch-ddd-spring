@@ -1,5 +1,7 @@
-package com.hex.arch.greeting.client;
+package com.hex.arch.greeting.client.driving.port;
 
+import com.hex.arch.greeting.client.CreateGreetingRequest;
+import com.hex.arch.greeting.client.GreetingResponse;
 import jakarta.validation.Valid;
 import java.util.UUID;
 import org.jspecify.annotations.NullMarked;
@@ -14,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @NullMarked
 @RequestMapping("/api/v1/greetings")
 public interface GreetingsAPI {
+
+
+    // TODO - Move this driving port as part of the domain/server
 
     @PostMapping
     ResponseEntity<GreetingResponse> createGreeting(@Valid @RequestBody CreateGreetingRequest request);

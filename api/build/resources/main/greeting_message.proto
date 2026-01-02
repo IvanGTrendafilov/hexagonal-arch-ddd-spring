@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+import "greeting_created_event.proto";
+
+option java_multiple_files = true;
+option java_outer_classname = "GreetingMessageProto";
+option java_package = "com.hex.arch.greeting.proto";
+
+message GreetingMessage {
+  oneof payload {
+    GreetingCreatedEvent greeting_created_event = 1;
+  }
+}

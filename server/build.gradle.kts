@@ -32,6 +32,9 @@ dependencies {
     implementation("org.jspecify:jspecify:0.3.0")
     implementation("org.jmolecules:jmolecules-ddd:1.9.0")
 
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+    implementation("org.springframework.boot:spring-boot-starter-cache")
+
     runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("org.flywaydb:flyway-core")
     runtimeOnly("org.flywaydb:flyway-database-postgresql")
