@@ -9,10 +9,10 @@ import org.jmolecules.ddd.annotation.AggregateRoot;
 @NullMarked
 @AggregateRoot
 public record Greeting(
-    UUID id,
-    String message,
-    @Nullable String recipient,
-    Instant createdAt
+        UUID id,
+        String message,
+        @Nullable Recipient recipient,
+        Instant createdAt
 ) implements java.io.Serializable {
     public Greeting {
         if (message == null || message.isBlank()) {
@@ -30,8 +30,7 @@ public record Greeting(
         return new Greeting(id, newMessage, recipient, createdAt);
     }
 
-    public Greeting withRecipient(String newRecipient) {
+    public Greeting withRecipient(@Nullable Recipient newRecipient) {  // Changed from String
         return new Greeting(id, message, newRecipient, createdAt);
     }
 }
-

@@ -7,9 +7,18 @@ import org.jspecify.annotations.Nullable;
 
 @NullMarked
 public record GreetingResponse(
-    UUID id,
-    String message,
-    @Nullable String recipient,
-    Instant createdAt
-) implements java.io.Serializable {}
+        UUID id,
+        String message,
+        @Nullable RecipientResponse recipient,  // Changed from String
+        Instant createdAt
+) implements java.io.Serializable {
 
+    public record RecipientResponse(
+            UUID id,
+            String firstName,
+            String lastName,
+            String address,
+            String gender,
+            Integer age
+    ) implements java.io.Serializable {}
+}
