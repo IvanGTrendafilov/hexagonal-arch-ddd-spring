@@ -5,7 +5,6 @@ import com.hex.arch.greeting.domain.repository.RecipientRepository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
 

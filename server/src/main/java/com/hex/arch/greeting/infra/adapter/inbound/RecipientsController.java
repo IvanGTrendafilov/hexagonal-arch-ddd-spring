@@ -1,24 +1,30 @@
 package com.hex.arch.greeting.infra.adapter.inbound;
 
+import com.hex.arch.greeting.client.CreateRecipientRequest;
+import com.hex.arch.greeting.client.RecipientResponse;
+import com.hex.arch.greeting.client.driving.port.RecipientsAPI;
 import com.hex.arch.greeting.domain.model.Recipient;
 import com.hex.arch.greeting.domain.repository.RecipientRepository;
+import jakarta.validation.Valid;
+
 import java.time.Instant;
 import java.util.UUID;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/recipients")
-public class RecipientsController {
+public class RecipientsController implements RecipientsAPI {
     private final RecipientRepository recipientRepository;
 
     public RecipientsController(RecipientRepository recipientRepository) {
         this.recipientRepository = recipientRepository;
     }
 
-    @PostMapping
-    public ResponseEntity<Recipient> createRecipient(@RequestBody CreateRecipientRequest request) {
+    @Override
+    public ResponseEntity<RecipientResponse> createRecipient(@Valid @RequestBody CreateRecipientRequest request) {
         Recipient recipient = new Recipient(
                 UUID.randomUUID(),
                 request.firstName(),
@@ -30,27 +36,31 @@ public class RecipientsController {
         );
 
         recipientRepository.save(recipient);
-        return ResponseEntity.status(HttpStatus.CREATED).body(recipient);
+        RecipientResponse response = toResponse(recipient);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Recipient> getRecipient(@PathVariable UUID id) {
+    @Override
+    public ResponseEntity<RecipientResponse> getRecipient(@PathVariable UUID id) {
         return recipientRepository.findById(id)
-                .map(ResponseEntity::ok)
+                .map(recipient -> ResponseEntity.ok(toResponse(recipient)))
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteRecipient(@PathVariable UUID id) {
+    @Override
+    public void deleteRecipient(@PathVariable UUID id) {
         recipientRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
     }
 
-    record CreateRecipientRequest(
-            String firstName,
-            String lastName,
-            String address,
-            String gender,
-            Integer age
-    ) {}
+    private RecipientResponse toResponse(Recipient recipient) {
+        return new RecipientResponse(
+                recipient.id(),
+                recipient.firstName(),
+                recipient.lastName(),
+                recipient.createdAt(),
+                recipient.address(),
+                recipient.gender(),
+                recipient.age()
+        );
+    }
 }

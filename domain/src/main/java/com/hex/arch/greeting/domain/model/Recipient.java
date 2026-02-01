@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.UUID;
 
-public record Recipient (
+public record Recipient(
         UUID id,
         String firstName,
         String lastName,
